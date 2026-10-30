@@ -126,4 +126,32 @@ void shouldAllowSameDatesForDifferentRooms() {
 
     assertEquals(2, repository.findAll().size());
 }
+@Test
+void shouldAllowBookingStartingOnPreviousCheckoutDate() {
+    BookingRepository repository = new InMemoryBookingRepository();
+    BookingService service = new BookingService(repository);
+
+    Room room = new Room(101, "Double");
+
+    Booking firstBooking = new Booking(
+            1,
+            new Guest(1, "Иван"),
+            room,
+            LocalDate.of(2026, 9, 10),
+            LocalDate.of(2026, 9, 15)
+    );
+
+    Booking secondBooking = new Booking(
+            2,
+            new Guest(2, "Анна"),
+            room,
+            LocalDate.of(2026, 9, 15),
+            LocalDate.of(2026, 9, 20)
+    );
+
+    service.createBooking(firstBooking);
+    service.createBooking(secondBooking);
+
+    assertEquals(2, repository.findAll().size());
+}
 }
