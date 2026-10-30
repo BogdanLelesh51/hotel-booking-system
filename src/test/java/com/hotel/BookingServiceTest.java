@@ -82,6 +82,7 @@ void shouldThrowExceptionWhenDatesOverlapForSameRoom() {
     assertThrows(IllegalStateException.class, () -> {
         service.createBooking(secondBooking);
     });
+    assertEquals(1, repository.findAll().size());
 }
 @Test
 void shouldAllowSameDatesForDifferentRooms() {
