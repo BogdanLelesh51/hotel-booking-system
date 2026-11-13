@@ -5,6 +5,7 @@ import com.hotel.repository.BookingRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+// This is an intentionally very long comment line added only to trigger a Checkstyle LineLength violation for the demo experiment of lab 5
 public class BookingService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(BookingService.class);
