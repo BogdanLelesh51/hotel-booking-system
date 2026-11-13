@@ -9,6 +9,12 @@ pipeline {
             }
         }
 
+        stage('Static Analysis') {
+            steps {
+                sh 'mvn checkstyle:check'
+            }
+        }
+
         stage('Test') {
             steps {
                 sh 'mvn test'
@@ -39,7 +45,7 @@ pipeline {
 
     post {
         success {
-            echo 'Pipeline завершен успешно: Build -> Test -> Package -> Verify JAR'
+            echo 'Pipeline завершен успешно: Build -> Static Analysis -> Test -> Package -> Verify JAR'
         }
         failure {
             echo 'Pipeline завершился с ошибкой. Проверьте Console Output для деталей.'

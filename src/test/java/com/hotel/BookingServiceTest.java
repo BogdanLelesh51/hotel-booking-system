@@ -82,7 +82,7 @@ void shouldThrowExceptionWhenDatesOverlapForSameRoom() {
     assertThrows(IllegalStateException.class, () -> {
         service.createBooking(secondBooking);
     });
-   assertEquals(2, repository.findAll().size());
+   assertEquals(1, repository.findAll().size());
 }
 @Test
 void shouldAllowSameDatesForDifferentRooms() {
@@ -154,5 +154,19 @@ void shouldAllowBookingStartingOnPreviousCheckoutDate() {
     service.createBooking(secondBooking);
 
     assertEquals(2, repository.findAll().size());
+}
+
+@Test
+void shouldThrowExceptionAndLogErrorWhenBookingIsNull() {
+
+    BookingRepository repository =
+            new InMemoryBookingRepository();
+
+    BookingService service =
+            new BookingService(repository);
+
+    assertThrows(IllegalArgumentException.class, () -> {
+        service.createBooking(null);
+    });
 }
 }

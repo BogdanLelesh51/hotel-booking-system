@@ -28,20 +28,15 @@ public class Application {
 
         System.out.println("Отель: " + config.getProperty("hotel.name"));
 
-        BookingRepository repository =
-                new InMemoryBookingRepository();
+        BookingRepository repository = new InMemoryBookingRepository();
 
-        BookingService service =
-                new BookingService(repository);
+        BookingService service = new BookingService(repository);
 
-        Guest guest1 =
-                new Guest(1, "Иван");
+        Guest guest1 = new Guest(1, "Иван");
 
-        Guest guest2 =
-                new Guest(2, "Анна");
+        Guest guest2 = new Guest(2, "Анна");
 
-        Room room =
-                new Room(101, "Double");
+        Room room = new Room(101, "Double");
 
         Booking booking1 = new Booking(
                 1,
@@ -61,13 +56,13 @@ public class Application {
 
         service.createBooking(booking1);
 
-System.out.println("Первое бронирование создано");
+        System.out.println("Первое бронирование создано");
 
-try {
-    service.createBooking(booking2);
-    System.out.println("Второе бронирование создано");
-} catch (IllegalStateException e) {
-    System.out.println("Ошибка бронирования: " + e.getMessage());
-}
+        try {
+            service.createBooking(booking2);
+            System.out.println("Второе бронирование создано");
+        } catch (IllegalStateException e) {
+            System.out.println("Ошибка бронирования: " + e.getMessage());
+        }
     }
 }
